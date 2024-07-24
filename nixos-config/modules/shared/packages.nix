@@ -18,13 +18,13 @@ with pkgs; [
 
   # Encryption and security tools
   age
-  age-plugin-yubikey
-  gnupg
-  libfido2
+  #age-plugin-yubikey
+  #gnupg
+  #libfido2
 
   # Cloud-related tools and SDKs
-  docker
-  docker-compose
+  #docker
+  #docker-compose
 
   # Media-related packages
   emacs-all-the-icons-fonts
@@ -32,21 +32,22 @@ with pkgs; [
   ffmpeg
   fd
   font-awesome
+  feather-font # from overlay
   hack-font
   noto-fonts
   noto-fonts-emoji
   meslo-lgs-nf
 
   # Node.js development tools
-  nodePackages.npm # globally install npm
-  nodePackages.prettier
-  nodejs
+  #nodePackages.npm # globally install npm
+  #nodePackages.prettier
+  #nodejs
 
   # Text and terminal utilities
   htop
-  hunspell
+  #hunspell
   iftop
-  jetbrains-mono
+  #jetbrains-mono
   jq
   ripgrep
   tree
