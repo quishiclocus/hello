@@ -1,26 +1,26 @@
 { config, pkgs, lib, ... }:
 
-let name = "Chuck Stearns";
-    user = "chuck";
-    email = "chuck.stearns@gmail.com"; in
+let name = "%NAME%";
+    user = "%USER%";
+    email = "%EMAIL%"; in
 {
   # Shared shell configuration
   zsh = {
     enable = true;
     autocd = false;
-    cdpath = [ "~/.local/share/src" ];
     plugins = [
       {
-          name = "powerlevel10k";
-          src = pkgs.zsh-powerlevel10k;
-          file = "share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
+        name = "powerlevel10k";
+        src = pkgs.zsh-powerlevel10k;
+        file = "share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
       }
       {
-          name = "powerlevel10k-config";
-          src = lib.cleanSource ./config;
-          file = "p10k.zsh";
+        name = "powerlevel10k-config";
+        src = lib.cleanSource ./config;
+        file = "p10k.zsh";
       }
     ];
+
     initExtraFirst = ''
       if [[ -f /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh ]]; then
         . /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
@@ -35,9 +35,6 @@ let name = "Chuck Stearns";
       # Remove history data we don't want to see
       export HISTIGNORE="pwd:ls:cd"
 
-      # Ripgrep alias
-      alias search=rg -p --glob '!node_modules/*'  $@
-
       # Emacs is my editor
       export ALTERNATE_EDITOR=""
       export EDITOR="emacsclient -t"
@@ -51,10 +48,6 @@ let name = "Chuck Stearns";
       shell() {
           nix-shell '<nixpkgs>' -A "$1"
       }
-
-      # pnpm is a javascript package manager
-      alias pn=pnpm
-      alias px=pnpx
 
       # Use difftastic, syntax-aware diffing
       alias diff=difft
@@ -78,7 +71,6 @@ let name = "Chuck Stearns";
 	    editor = "vim";
         autocrlf = "input";
       };
-      commit.gpgsign = true;
       pull.rebase = true;
       rebase.autoStash = true;
     };

@@ -1,7 +1,7 @@
 { config, pkgs, lib, ... }:
 
 let
-  user = "chuck";
+  user = "%USER%";
   xdg_configHome  = "/home/${user}/.config";
   shared-programs = import ../shared/home-manager.nix { inherit config pkgs lib; };
   shared-files = import ../shared/files.nix { inherit config pkgs; };
@@ -114,6 +114,6 @@ in
     };
   };
 
-  programs = shared-programs // { gpg.enable = true; };
+  programs = shared-programs // {};
 
 }

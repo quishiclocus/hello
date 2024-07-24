@@ -1,14 +1,12 @@
-{ config, inputs, pkgs, agenix, ... }:
+{ config, inputs, pkgs, ... }:
 
-let user = "chuck";
+let user = "%USER%";
     keys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOk8iAnIaa1deoc7jw8YACPNVka1ZFJxhnU4G74TmS+p" ]; in
 {
   imports = [
-    ../../modules/nixos/secrets.nix
     ../../modules/nixos/disk-config.nix
     ../../modules/shared
     ../../modules/shared/cachix
-    agenix.nixosModules.default
   ];
 
   # Use the systemd-boot EFI boot loader.
@@ -60,28 +58,30 @@ let user = "chuck";
     zsh.enable = true;
   };
 
-  services = {
+  services = { 
     xserver = {
       enable = true;
 
       # Uncomment these for AMD or Nvidia GPU
+      # boot.initrd.kernelModules = [ "amdgpu" ];
       # videoDrivers = [ "amdgpu" ];
       # videoDrivers = [ "nvidia" ];
 
-      # Uncomment this for Nvidia GPU
+      # Uncomment for Nvidia GPU
       # This helps fix tearing of windows for Nvidia cards
-      # services.xserver.screenSection = ''
+      # screenSection = ''
       #   Option       "metamodes" "nvidia-auto-select +0+0 {ForceFullCompositionPipeline=On}"
       #   Option       "AllowIndirectGLXProtocol" "off"
       #   Option       "TripleBuffer" "on"
       # '';
 
-      # LightDM Display Manager
-      displayManager.defaultSession = "none+bspwm";
-      displayManager.lightdm = {
-        enable = true;
-        greeters.slick.enable = true;
-        background = ../../modules/nixos/config/login-wallpaper.png;
+      displayManager = {
+        defaultSession = "none+bspwm";
+        lightdm = {
+          enable = true;
+          greeters.slick.enable = true;
+          background = ../../modules/nixos/config/login-wallpaper.png;
+        };
       };
 
       # Tiling window manager
@@ -95,12 +95,12 @@ let user = "chuck";
 
       # Better support for general peripherals
       libinput.enable = true;
+
     };
 
     # Let's be able to SSH into this machine
     openssh.enable = true;
 
-    # Sync state between machines
     # Sync state between machines
     syncthing = {
       enable = true;
@@ -118,6 +118,10 @@ let user = "chuck";
         options.globalAnnounceEnabled = false; # Only sync on LAN
       };
     };
+
+    # Enable CUPS to print documents
+    # printing.enable = true;
+    # printing.drivers = [ pkgs.brlaser ]; # Brother printer driver
 
     # Picom, my window compositor with fancy effects
     #
@@ -225,30 +229,30 @@ let user = "chuck";
     serviceConfig.TimeoutStartSec = "7min";
   };
 
-  # Enable CUPS to print documents
-  # services.printing.enable = true;
-  # services.printing.drivers = [ pkgs.brlaser ]; # Brother printer driver
-
   # Enable sound
   # sound.enable = true;
-  # hardware.pulseaudio.enable = true;
 
   # Video support
   hardware = {
     opengl.enable = true;
-    # nvidia.modesetting.enable = true;
+    # pulseaudio.enable = true;
+    # hardware.nvidia.modesetting.enable = true;
 
     # Enable Xbox support
-    # xone.enable = true;
+    # hardware.xone.enable = true;
 
     # Crypto wallet support
     ledger.enable = true;
   };
 
 
- # Add docker daemon
-  virtualisation.docker.enable = true;
-  virtualisation.docker.logDriver = "json-file";
+  # Add docker daemon
+  virtualisation = {
+    docker = {
+      enable = true;
+      logDriver = "json-file";
+    };
+  };
 
   # It's me, it's you, it's everyone
   users.users = {
@@ -292,10 +296,10 @@ let user = "chuck";
   ];
 
   environment.systemPackages = with pkgs; [
-    agenix.packages."${pkgs.system}".default # "x86_64-linux"
     gitAndTools.gitFull
     inetutils
   ];
 
   system.stateVersion = "21.05"; # Don't change this
+
 }
