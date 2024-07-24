@@ -28,7 +28,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     secrets = {
-      url = "git://github.com:quishiclocus/priv.git";
+      url = "https://github.com/quishiclocus/priv.git";
       flake = false;
     };
   };
