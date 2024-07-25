@@ -86,6 +86,7 @@ let name = "Chuck Stearns";
 	    editor = "vim";
         autocrlf = "input";
       };
+      commit.gpgsign = true;
       pull.rebase = true;
       rebase.autoStash = true;
     };
