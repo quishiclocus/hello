@@ -15,11 +15,12 @@ with pkgs; [
   sqlite
   wget
   zip
+  direnv
 
   # Encryption and security tools
   age
   #age-plugin-yubikey
-  #gnupg
+  gnupg
   #libfido2
 
   # Cloud-related tools and SDKs

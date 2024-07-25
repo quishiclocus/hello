@@ -54,10 +54,23 @@ let name = "Chuck Stearns";
 
       # Always color ls and group directories
       alias ls='ls --color=auto'
+      alias cmd0="export IN_NIX_SHELL=true; cd ~/src/cmd0/infrastructure; nix develop -c zsh"
       
       ### MANAGED BY RANCHER DESKTOP START (DO NOT EDIT)
       export PATH="/Users/chuck/.rd/bin:$PATH"
       ### MANAGED BY RANCHER DESKTOP END (DO NOT EDIT)
+
+      #### nix-zshell
+      if [[ -n "$IN_NIX_SHELL" ]]; then
+        label="cmd0"
+        if [[ "$name" != "$label" ]]; then
+          label="$label:$name"
+        fi
+        export PS1=$'%{$fg[green]%}'"$label $PS1"
+        unset label
+        unset IN_NIX_SHELL
+      fi
+
     '';
   };
 
