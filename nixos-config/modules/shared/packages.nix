@@ -12,7 +12,6 @@ with pkgs; [
   coreutils
   killall
   neofetch
-  openssh
   sqlite
   wget
   zip
