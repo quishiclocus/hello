@@ -6,6 +6,7 @@ with pkgs; [
   aspell
   aspellDicts.en
   bash-completion
+  bash
   bat
   btop
   coreutils
@@ -16,6 +17,8 @@ with pkgs; [
   wget
   zip
   direnv
+  go
+  gh
 
   # Encryption and security tools
   age
@@ -58,6 +61,7 @@ with pkgs; [
   zsh-powerlevel10k
 
   # Python packages
-  python39
-  python39Packages.virtualenv # globally install virtualenv
+  (python3.withPackages (ps: [
+    ps.flask
+  ]))
 ]
