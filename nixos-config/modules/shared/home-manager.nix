@@ -279,19 +279,35 @@ let name = "Chuck Stearns";
         "/Users/${user}/.ssh/config_external"
       )
     ];
-    matchBlocks = {
-      "github.com" = {
-        identitiesOnly = true;
-        identityFile = [
-          (lib.mkIf pkgs.stdenv.hostPlatform.isLinux
-            "/home/${user}/.ssh/id_github"
-          )
-          (lib.mkIf pkgs.stdenv.hostPlatform.isDarwin
-            "/Users/${user}/.ssh/id_github"
-          )
-        ];
-      };
-    };
+#    matchBlocks = {
+#      "quishiclocus" = {
+#        addKeysToAgent = true;
+#        identitiesOnly = true;
+#        identityFile = [
+#          (lib.mkIf pkgs.stdenv.hostPlatform.isLinux
+#            "/home/${user}/.ssh/id_quishiclocus"
+#          )
+#          (lib.mkIf pkgs.stdenv.hostPlatform.isDarwin
+#            "/Users/${user}/.ssh/id_quishiclocus"
+#          )
+#        ];
+#      };
+#      "zerocmd" = {
+#        addKeysToAgent = true;
+#        identitiesOnly = true;
+#        identityFile = [
+#          (lib.mkIf pkgs.stdenv.hostPlatform.isLinux
+#            "/home/${user}/.ssh/id_zerocmd"
+#          )
+#          (lib.mkIf pkgs.stdenv.hostPlatform.isDarwin
+#            "/Users/${user}/.ssh/id_zerocmd"
+#          )
+#        ];
+#        hostName = "github.com";
+#        user = "git";
+#        preferredAuthentications = "publickey";
+#      };
+#    };
   };
 
   tmux = {
