@@ -10,6 +10,7 @@ with pkgs; [
   bat
   btop
   coreutils
+  difftastic
   killall
   neofetch
   sqlite
