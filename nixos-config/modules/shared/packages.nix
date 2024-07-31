@@ -6,14 +6,10 @@ with pkgs; [
   aspell
   aspellDicts.en
   bash-completion
-  #bash
+  bash
   bat
   btop
   coreutils
-  difftastic
-  killall
-  neofetch
-  sqlite
   wget
   zip
   direnv
@@ -23,7 +19,7 @@ with pkgs; [
   # Encryption and security tools
   age
   #age-plugin-yubikey
-  gnupg
+  #gnupg
   #libfido2
 
   # Cloud-related tools and SDKs
@@ -31,7 +27,7 @@ with pkgs; [
   #docker-compose
 
   # Media-related packages
-  emacs-all-the-icons-fonts
+  #emacs-all-the-icons-fonts
   dejavu_fonts
   ffmpeg
   fd

@@ -3,12 +3,13 @@ _:
 [
   # Development Tools
 #  "homebrew/cask/docker"
-#  "visual-studio-code"
+  "homebrew/cask/rancher"
+  "visual-studio-code"
 
   # Communication Tools
 #  "discord"
 #  "notion"
-#  "slack"
+  "slack"
 #  "telegram"
 #  "zoom"
 
@@ -22,5 +23,5 @@ _:
 #  "raycast"
 
   # Browsers
-#  "google-chrome"
+  "google-chrome"
 ]
