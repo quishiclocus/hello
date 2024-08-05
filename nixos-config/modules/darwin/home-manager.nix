@@ -69,27 +69,17 @@ in
   # Fully declarative dock using the latest from Nix Store
   local.dock.enable = true;
   local.dock.entries = [
+    { path = "/Applications/Safari.app/"; }
+    { path = "/Applications/Microsoft Outlook.app/"; }
     { path = "/Applications/Slack.app/"; }
-    { path = "/System/Applications/Messages.app/"; }
-    { path = "/System/Applications/Facetime.app/"; }
-    { path = "${pkgs.alacritty}/Applications/Alacritty.app/"; }
-    { path = "/System/Applications/Music.app/"; }
-    { path = "/System/Applications/News.app/"; }
-    { path = "/System/Applications/Photos.app/"; }
-    { path = "/System/Applications/Photo Booth.app/"; }
-    { path = "/System/Applications/TV.app/"; }
-    { path = "/System/Applications/Home.app/"; }
+    { path = "/Applications/Visual Studio Code.app/"; }
     {
-      path = toString myEmacsLauncher;
-      section = "others";
-    }
-    {
-      path = "${config.users.users.${user}.home}/.local/share/";
+      path = "${config.users.users.${user}.home}/src/";
       section = "others";
       options = "--sort name --view grid --display folder";
     }
     {
-      path = "${config.users.users.${user}.home}/.local/share/downloads";
+      path = "${config.users.users.${user}.home}/Downloads";
       section = "others";
       options = "--sort name --view grid --display stack";
     }

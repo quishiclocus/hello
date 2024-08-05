@@ -19,6 +19,11 @@ let name = "Chuck Stearns";
         src = lib.cleanSource ./config;
         file = "p10k.zsh";
       }
+      {
+        name = "zshrc_local";
+        src = lib.cleanSource ./zshrc_local-config;
+        file = "zshrc_local.zsh";
+      }
     ];
 
     initExtraFirst = ''
@@ -33,12 +38,13 @@ let name = "Chuck Stearns";
       export PATH=$HOME/.local/share/bin:$PATH
 
       # Remove history data we don't want to see
-      export HISTIGNORE="pwd:ls:cd"
+      # export HISTIGNORE="pwd:ls:cd"
 
       # Emacs is my editor
       export ALTERNATE_EDITOR=""
-      export EDITOR="emacsclient -t"
-      export VISUAL="emacsclient -c -a emacs"
+      export EDITOR="vim"
+      #export EDITOR="emacsclient -t"
+      #export VISUAL="emacsclient -c -a emacs"
 
       e() {
           emacsclient -t "$@"
@@ -48,29 +54,6 @@ let name = "Chuck Stearns";
       shell() {
           nix-shell '<nixpkgs>' -A "$1"
       }
-
-      # Use difftastic, syntax-aware diffing
-      alias diff=difft
-
-      # Always color ls and group directories
-      alias ls='ls --color=auto'
-      alias cmd0="export IN_NIX_SHELL=true; cd ~/src/cmd0/infrastructure; nix develop -c zsh"
-      
-      ### MANAGED BY RANCHER DESKTOP START (DO NOT EDIT)
-      export PATH="/Users/chuck/.rd/bin:$PATH"
-      ### MANAGED BY RANCHER DESKTOP END (DO NOT EDIT)
-
-      #### nix-zshell
-      if [[ -n "$IN_NIX_SHELL" ]]; then
-        label="cmd0"
-        if [[ "$name" != "$label" ]]; then
-          label="$label:$name"
-        fi
-        export PS1=$'%{$fg[green]%}'"$label $PS1"
-        unset label
-        unset IN_NIX_SHELL
-      fi
-
     '';
   };
 
@@ -207,15 +190,41 @@ let name = "Chuck Stearns";
   alacritty = {
     enable = true;
     settings = {
+
+      import = [ 
+        "./alacritty_local.toml,"
+      ];
+
       cursor = {
         style = "Block";
       };
 
+      keyboard = {
+        bindings = [
+          { key = "`"; mods = "Control"; action = "ToggleSimpleFullscreen"; }
+          { key = "T"; mods = "Command|Shift"; action = "CreateNewTab"; }
+          { key = "ArrowRight"; mods = "Command|Shift"; action = "SelectNextTab"; }
+          { key = "ArrowLeft"; mods = "Command|Shift"; action = "SelectPreviousTab"; }
+          { key = "ArrowRight"; mods = "Control"; chars = "\u001BF"; }
+          { key = "ArrowLeft"; mods = "Control"; chars = "\u001BB"; }
+        ];
+      };
+
       window = {
-        opacity = 1.0;
+        option_as_alt = "None";
+        opacity = 0.8;
         padding = {
-          x = 24;
-          y = 24;
+          x = 4;
+          y = 4;
+        };
+        blur = true;
+        startup_mode = "SimpleFullscreen";
+        dynamic_padding = true;
+        decorations = "full";
+        title = "Terminal";
+        class = {
+          instance = "Alacritty";
+          general = "Alacritty";
         };
       };
 
@@ -226,16 +235,8 @@ let name = "Chuck Stearns";
         };
         size = lib.mkMerge [
           (lib.mkIf pkgs.stdenv.hostPlatform.isLinux 10)
-          (lib.mkIf pkgs.stdenv.hostPlatform.isDarwin 14)
+          (lib.mkIf pkgs.stdenv.hostPlatform.isDarwin 12)
         ];
-      };
-
-      dynamic_padding = true;
-      decorations = "full";
-      title = "Terminal";
-      class = {
-        instance = "Alacritty";
-        general = "Alacritty";
       };
 
       colors = {

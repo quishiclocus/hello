@@ -6,7 +6,7 @@ with pkgs; [
   aspell
   aspellDicts.en
   bash-completion
-  bash
+  #bash
   bat
   btop
   coreutils
@@ -25,6 +25,7 @@ with pkgs; [
   # Cloud-related tools and SDKs
   #docker
   #docker-compose
+  rancher
 
   # Media-related packages
   #emacs-all-the-icons-fonts
