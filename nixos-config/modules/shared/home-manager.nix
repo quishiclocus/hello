@@ -218,7 +218,6 @@ let name = "Chuck Stearns";
           y = 4;
         };
         blur = true;
-        startup_mode = "SimpleFullscreen";
         dynamic_padding = true;
         decorations = "full";
         title = "Terminal";

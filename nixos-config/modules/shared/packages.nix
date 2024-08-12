@@ -5,8 +5,6 @@ with pkgs; [
   alacritty
   aspell
   aspellDicts.en
-  bash-completion
-  #bash
   bat
   btop
   coreutils
@@ -15,6 +13,16 @@ with pkgs; [
   direnv
   go
   gh
+  bat
+  delta
+  eza
+  fd
+  fzf
+  neovim
+  zoxide
+  zsh-autosuggestions
+  zsh-syntax-highlighting
+
 
   # Encryption and security tools
   age
