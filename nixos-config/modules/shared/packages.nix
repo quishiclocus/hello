@@ -8,6 +8,7 @@ with pkgs; [
   bat
   btop
   coreutils
+  difftastic
   wget
   zip
   direnv
@@ -27,7 +28,7 @@ with pkgs; [
   # Encryption and security tools
   age
   #age-plugin-yubikey
-  #gnupg
+  gnupg
   #libfido2
 
   # Cloud-related tools and SDKs
@@ -48,9 +49,9 @@ with pkgs; [
   meslo-lgs-nf
 
   # Node.js development tools
-  #nodePackages.npm # globally install npm
-  #nodePackages.prettier
-  #nodejs
+  nodePackages.npm # globally install npm
+  nodePackages.prettier
+  nodejs
 
   # Text and terminal utilities
   htop

@@ -70,9 +70,12 @@ in
   local.dock.enable = true;
   local.dock.entries = [
     { path = "/Applications/Safari.app/"; }
+    { path = "/Applications/Google Chrome.app/"; }
     { path = "/Applications/Microsoft Outlook.app/"; }
     { path = "/Applications/Slack.app/"; }
     { path = "/Applications/Visual Studio Code.app/"; }
+    { path = "/Applications/Nix Apps/Alacritty.app/"; }
+    { path = "/System/Applications/Utilities/Terminal.app/"; }
     {
       path = "${config.users.users.${user}.home}/src/";
       section = "others";
