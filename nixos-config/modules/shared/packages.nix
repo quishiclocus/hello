@@ -23,7 +23,21 @@ with pkgs; [
   zoxide
   zsh-autosuggestions
   zsh-syntax-highlighting
-
+  neomutt
+  isync
+  curl
+  msmtp
+  pass
+  lynx
+  notmuch
+  abook
+  urlscan
+  mutt-with-sidebar
+  offlineimap
+  oauth2ms
+  cyrus_sasl
+  cyrus-sasl-xoauth2
+  gpgme
 
   # Encryption and security tools
   age
@@ -47,6 +61,7 @@ with pkgs; [
   noto-fonts
   noto-fonts-emoji
   meslo-lgs-nf
+  wezterm
 
   # Node.js development tools
   nodePackages.npm # globally install npm
@@ -67,7 +82,10 @@ with pkgs; [
   zsh-powerlevel10k
 
   # Python packages
-  (python3.withPackages (ps: [
+  (python312.withPackages (ps: [
     ps.flask
+    ps.setuptools
+    ps.pip
+    ps.pipx
   ]))
 ]
