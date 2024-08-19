@@ -79,13 +79,18 @@ with pkgs; [
   tmux
   unrar
   unzip
-  zsh-powerlevel10k
+  #zsh-powerlevel10k
+  starship
 
   # Python packages
+  poetry
   (python312.withPackages (ps: [
     ps.flask
     ps.setuptools
     ps.pip
     ps.pipx
+    ps.pylint
+    ps.poetry-core
+    ps.ipython
   ]))
 ]
