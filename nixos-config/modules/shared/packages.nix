@@ -32,18 +32,20 @@ with pkgs; [
   notmuch
   abook
   urlscan
+  mutt
   mutt-with-sidebar
   offlineimap
-  oauth2ms
-  cyrus_sasl
-  cyrus-sasl-xoauth2
-  gpgme
+  awscli
 
   # Encryption and security tools
   age
   #age-plugin-yubikey
   gnupg
   #libfido2
+  oauth2ms
+  cyrus_sasl
+  cyrus-sasl-xoauth2
+  gpgme
 
   # Cloud-related tools and SDKs
   #docker
@@ -61,7 +63,6 @@ with pkgs; [
   noto-fonts
   noto-fonts-emoji
   meslo-lgs-nf
-  wezterm
 
   # Node.js development tools
   nodePackages.npm # globally install npm
@@ -79,8 +80,10 @@ with pkgs; [
   tmux
   unrar
   unzip
-  #zsh-powerlevel10k
-  starship
+  zsh-powerlevel10k
+  #starship
+  bash-completion
+  wezterm
 
   # Python packages
   poetry
