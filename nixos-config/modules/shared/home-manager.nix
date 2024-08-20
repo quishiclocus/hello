@@ -76,7 +76,7 @@ let name = "Chuck Stearns";
     settings = {
       add_newline = true;
       command_timeout = 1000;
-      format = "$shlvl$username$hostname$nix_shell$git_branch$git_metrics$git_commit$git_state$git_status$directory$jobs$cmd_duration$character";
+      format = "$shlvl$nix_shell$username$hostname$git_branch$git_metrics$git_commit$git_state$git_status$directory$jobs$cmd_duration$character";
       username = {
         style_user = "green bold";
         style_root = "red bold";
@@ -99,9 +99,11 @@ let name = "Chuck Stearns";
       directory = {
         home_symbol = " 󰋞 ~";
         read_only_style = "197";
-        read_only = " 󰌾 ";
+        read_only = "󰌾";
+        truncation_symbol = " …/";
         truncate_to_repo = true;
         style = "bold italic blue";
+        format = "[$path]($style)[$read_only]($read_only_style)";
       };
       cmd_duration = {
         min_time = 4;
@@ -121,13 +123,13 @@ let name = "Chuck Stearns";
         disabled = false;
         symbol = "λ ";
       };
-#      shell = {
-#        disabled = false;
-#        format = "$indicator";
-#        fish_indicator = "";
-#        bash_indicator = "[BASH](bright-white) ";
-#        zsh_indicator = "";
-#      };
+      shell = {
+        disabled = false;
+        format = "$indicator";
+        fish_indicator = "[f](bright-white)";
+        bash_indicator = "[b](bright-white) ";
+        zsh_indicator = "[z](bright-white)";
+      };
       python = {
         symbol = " ";
         python_binary = ["./venv/bin/python" "python" "python3" "python2"];
@@ -151,19 +153,19 @@ let name = "Chuck Stearns";
         format = "[\($all_status$ahead_behind\)]($style)";
         style = "bold green";
         conflicted = "🏳";
-        up_to_date = "  ";
-        untracked = "  ";
+        up_to_date = "";
+        untracked = "";
         ahead = "⇡\${count}";
         diverged = "⇕⇡\${ahead_count}⇣\${behind_count}";
         behind = "⇣\${count}";
-        stashed = "  ";
-        modified = "  ";
+        stashed = "";
+        modified = "";
         staged = "[++\($count\)](green)";
-        renamed = " 襁 ";
-        deleted = "  ";
+        renamed = "襁";
+        deleted = "";
       };
       git_metrics.disabled = false;
-      aws.symbol = "  ";
+      aws.symbol = "";
     };
   };
 
