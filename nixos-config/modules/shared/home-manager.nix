@@ -97,10 +97,10 @@ let name = "Chuck Stearns";
         error_symbol = "[](red)";
       };
       directory = {
-        home_symbol = " 󰋞 ~";
+        home_symbol = " 󰋞 ~ ";
         read_only_style = "197";
         read_only = "󰌾";
-        truncation_symbol = " …/";
+        truncation_symbol = " …/ ";
         truncate_to_repo = true;
         style = "bold italic blue";
         format = "[$path]($style)[$read_only]($read_only_style)";
@@ -110,7 +110,7 @@ let name = "Chuck Stearns";
         show_milliseconds = false;
         disabled = false;
         style = "bold italic red";
-        format = "[$duration]($style) ";
+        format = " [$duration]($style) ";
       };
       nix_shell = {
         disabled = false;
@@ -121,7 +121,7 @@ let name = "Chuck Stearns";
       };
       shlvl = {
         disabled = false;
-        symbol = "λ ";
+        symbol = "λ";
       };
       shell = {
         disabled = false;
@@ -150,7 +150,7 @@ let name = "Chuck Stearns";
         style = "bold purple";
       };
       git_status = {
-        format = "[\($all_status$ahead_behind\)]($style)";
+        format = " [\($all_status$ahead_behind\)]($style)";
         style = "bold green";
         conflicted = "🏳";
         up_to_date = "";
@@ -164,7 +164,9 @@ let name = "Chuck Stearns";
         renamed = "襁";
         deleted = "";
       };
-      git_metrics.disabled = false;
+      git_metrics = {
+       format = "( [+$added]($added_style))([-$deleted]($deleted_style) )"; 
+      };
       aws.symbol = "";
     };
   };
