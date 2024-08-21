@@ -76,7 +76,7 @@ let name = "Chuck Stearns";
     settings = {
       add_newline = true;
       command_timeout = 1000;
-      format = "$shlvl$nix_shell$username$hostname$git_branch$git_metrics$git_commit$git_state$git_status$directory$jobs$cmd_duration$character";
+      format = "$shell$shlvl$nix_shell$username$hostname$git_branch$git_metrics$git_commit$git_state$git_status$directory$jobs$cmd_duration$character";
       username = {
         style_user = "green bold";
         style_root = "red bold";
@@ -93,14 +93,14 @@ let name = "Chuck Stearns";
         disabled = false;
       };
       character = {
-        success_symbol = "[➜](bold green)";
-        error_symbol = "[](red)";
+        success_symbol = " [➜](bold green)";
+        error_symbol = " [](red)";
       };
       directory = {
-        home_symbol = " 󰋞 ~ ";
+        home_symbol = " 󰋞 ~";
         read_only_style = "197";
         read_only = "󰌾";
-        truncation_symbol = " …/ ";
+        truncation_symbol = " …/";
         truncate_to_repo = true;
         style = "bold italic blue";
         format = "[$path]($style)[$read_only]($read_only_style)";
@@ -110,14 +110,14 @@ let name = "Chuck Stearns";
         show_milliseconds = false;
         disabled = false;
         style = "bold italic red";
-        format = " [$duration]($style) ";
+        format = " [$duration]($style)";
       };
       nix_shell = {
         disabled = false;
         pure_msg = "";
         impure_msg = "";
-        symbol = "  ";
-        format = "[$symbol$state(\($name\))]($style)";
+        symbol = " ";
+        format = "[$symbol$state(\($name\))]($style) ";
       };
       shlvl = {
         disabled = false;
@@ -126,9 +126,9 @@ let name = "Chuck Stearns";
       shell = {
         disabled = false;
         format = "$indicator";
-        fish_indicator = "[f](bright-white)";
-        bash_indicator = "[b](bright-white) ";
-        zsh_indicator = "[z](bright-white)";
+        fish_indicator = "f(bright-cyan) ";
+        bash_indicator = "b(bright-cyan) ";
+        zsh_indicator = "z(bright-cyan) ";
       };
       python = {
         symbol = " ";
@@ -320,35 +320,8 @@ let name = "Chuck Stearns";
         "/Users/${user}/.ssh/config_external"
       )
     ];
-#    matchBlocks = {
-#      "quishiclocus" = {
-#        addKeysToAgent = true;
-#        identitiesOnly = true;
-#        identityFile = [
-#          (lib.mkIf pkgs.stdenv.hostPlatform.isLinux
-#            "/home/${user}/.ssh/id_quishiclocus"
-#          )
-#          (lib.mkIf pkgs.stdenv.hostPlatform.isDarwin
-#            "/Users/${user}/.ssh/id_quishiclocus"
-#          )
-#        ];
-#      };
-#      "zerocmd" = {
-#        addKeysToAgent = true;
-#        identitiesOnly = true;
-#        identityFile = [
-#          (lib.mkIf pkgs.stdenv.hostPlatform.isLinux
-#            "/home/${user}/.ssh/id_zerocmd"
-#          )
-#          (lib.mkIf pkgs.stdenv.hostPlatform.isDarwin
-#            "/Users/${user}/.ssh/id_zerocmd"
-#          )
-#        ];
-#        hostName = "github.com";
-#        user = "git";
-#        preferredAuthentications = "publickey";
-#      };
-#    };
+    forwardAgent = true;
+    addKeysToAgent = "yes";
   };
 
 #  tmux = {

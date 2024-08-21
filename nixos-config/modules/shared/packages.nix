@@ -35,7 +35,7 @@ with pkgs; [
   mutt
   mutt-with-sidebar
   offlineimap
-  awscli
+  awscli2
 
   # Encryption and security tools
   age
