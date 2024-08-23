@@ -12,16 +12,6 @@ let name = "Chuck Stearns";
       [[ ! -f ${./config/p10k.zsh} ]] || source ${./config/p10k.zsh}
     '';
     plugins = [
-#      {
-#        name = "powerlevel10k";
-#        src = pkgs.zsh-powerlevel10k;
-#        file = "share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
-#      }
-#      {
-#        name = "powerlevel10k-config";
-#        src = lib.cleanSource ./config;
-#        file = "p10k.zsh";
-#      }
       {
         name = "zshrc_local";
         src = lib.cleanSource ./zshrc_local-config;
@@ -50,23 +40,11 @@ let name = "Chuck Stearns";
       export PATH=$HOME/.npm-packages/bin:$HOME/bin:$PATH
       export PATH=$HOME/.local/share/bin:$PATH
 
-      # Remove history data we don't want to see
-      # export HISTIGNORE="pwd:ls:cd"
+      export HISTIGNORE="pwd:ls:cd"
 
-      # Emacs is my editor
-      export ALTERNATE_EDITOR=""
-      export EDITOR="vim"
-      #export EDITOR="emacsclient -t"
-      #export VISUAL="emacsclient -c -a emacs"
+      export ALTERNATE_EDITOR="vim"
+      export EDITOR="nvim"
 
-      e() {
-          emacsclient -t "$@"
-      }
-
-      # nix shortcuts
-      shell() {
-          nix-shell '<nixpkgs>' -A "$1"
-      }
     '';
   };
 
@@ -76,10 +54,41 @@ let name = "Chuck Stearns";
     settings = {
       add_newline = true;
       command_timeout = 1000;
-      format = "$shell$shlvl$nix_shell$username$hostname$git_branch$git_metrics$git_commit$git_state$git_status$directory$jobs$cmd_duration$character";
+      format = "[░▒▓](os_bg)$os$username[](bg:dir_bg fg:os_bg)$directory[](fg:dir_bg bg:git_bg)$git_branch$git_status[](fg:git_bg bg:lang_bg)$golang[](fg:lang_bg bg:background)\n$character";
+      right_format = "$shell$shlvl$jobs$cmd_duration";
+      continuation_prompt = "▶▶ ";
+      palette = "terafox";
+      palettes.duskfox = {
+        red = "#eb6f92";
+        green = "#a3be8c";
+        purple = "#c4a7e7";
+        yellow = "#f6c177";
+        os_bg = "#6e6a86";
+        os_fg = "#191726";
+        dir_bg = "#a3be8c";
+        dir_fg = "#232136";
+        git_bg = "#f6c177";
+        git_fg = "#2d2a45";
+        lang_bg = "#569fba";
+        lang_fg = "#373354";
+      };
+      palettes.terafox = {
+        red = "#e85c51";
+        green = "#7aa4a1";
+        purple = "#ad5c7c";
+        yellow = "#fda47f";
+        os_bg = "#587b7b";
+        os_fg = "#0f1c1e";
+        dir_bg = "#7aa4a1";
+        dir_fg = "#152528";
+        git_bg = "#fda47f";
+        git_fg = "#254147";
+        lang_bg = "#5a93aa";
+        lang_fg = "#254147";
+      };
       username = {
-        style_user = "green bold";
-        style_root = "red bold";
+        style_user = "bg:os_bg fg:os_fg";
+        style_root = "bg:os_bg fg:os_fg";
         format = "[$user]($style)";
         disabled = false;
         show_always = true;
@@ -93,17 +102,30 @@ let name = "Chuck Stearns";
         disabled = false;
       };
       character = {
-        success_symbol = " [➜](bold green)";
-        error_symbol = " [](red)";
+        disabled = false;
+        success_symbol = "[](bold fg:#a3be8c)";
+        error_symbol = "[](bold fg:#eb6f92)";
+        vimcmd_symbol = "[](bold fg:green)";
+        vimcmd_replace_one_symbol = "[](bold fg:purple)";
+        vimcmd_replace_symbol = "[](bold fg:purple)";
+        vimcmd_visual_symbol = "[](bold fg:yellow)";
       };
       directory = {
         home_symbol = " 󰋞 ~";
-        read_only_style = "197";
+        read_only_style = "fg:dir_fg bg:dir_bg";
         read_only = "󰌾";
+        truncation_length = 3;
         truncation_symbol = " …/";
         truncate_to_repo = true;
-        style = "bold italic blue";
+        style = "fg:dir_fg bg:dir_bg";
         format = "[$path]($style)[$read_only]($read_only_style)";
+      };
+      directory.substitutions = {
+        Documents = "󰈙 ";
+        Downloads = " ";
+        Music = " ";
+        Pictures = " ";
+        src = " ";
       };
       cmd_duration = {
         min_time = 4;
@@ -118,6 +140,7 @@ let name = "Chuck Stearns";
         impure_msg = "";
         symbol = " ";
         format = "[$symbol$state(\($name\))]($style) ";
+        style = "bg:os_bg fg:os_fg";
       };
       shlvl = {
         disabled = false;
@@ -131,7 +154,8 @@ let name = "Chuck Stearns";
         zsh_indicator = "z(bright-cyan) ";
       };
       python = {
-        symbol = " ";
+        symbol = "";
+        style = "bg:lang_bg";
         python_binary = ["./venv/bin/python" "python" "python3" "python2"];
         detect_extensions = ["py"];
       };
@@ -143,15 +167,18 @@ let name = "Chuck Stearns";
         detect_folders = [];
         disabled = false;
       };
-      golang.symbol = " ";
+      golang = {
+        symbol = "";
+        style = "bg:lang_bg";
+      };
       git_branch = {
         symbol = "  ";
         format = "[$symbol$branch]($style)";
-        style = "bold purple";
+        style = "fg:git_fg bg:git_bg";
       };
       git_status = {
-        format = " [\($all_status$ahead_behind\)]($style)";
-        style = "bold green";
+        format = "[\($all_status$ahead_behind\)]($style)";
+        style = "fg:git_fg bg:git_bg";
         conflicted = "🏳";
         up_to_date = "";
         untracked = "";
@@ -168,6 +195,31 @@ let name = "Chuck Stearns";
        format = "( [+$added]($added_style))([-$deleted]($deleted_style) )"; 
       };
       aws.symbol = "";
+      os = {
+        disabled = false;
+        style = "bg:os_bg fg:os_fg";
+      };
+      os.symbols = {
+        Windows = "󰍲";
+        Ubuntu = "󰕈";
+        SUSE = "";
+        Raspbian = "󰐿";
+        Mint = " 󰣭 ";
+        Macos = "󰀵";
+        Manjaro = "";
+        Linux = "󰌽";
+        Gentoo = "󰣨";
+        Fedora = "󰣛";
+        Alpine = "";
+        Amazon = "";
+        Android = "";
+        Arch = "󰣇";
+        Artix = "󰣇";
+        CentOS = "";
+        Debian = "󰣚";
+        Redhat = "󱄛";
+        RedHatEnterprise = "󱄛";
+      };
     };
   };
 
@@ -324,87 +376,107 @@ let name = "Chuck Stearns";
     addKeysToAgent = "yes";
   };
 
-#  tmux = {
-#    enable = true;
-#    plugins = with pkgs.tmuxPlugins; [
-#      vim-tmux-navigator
-#      sensible
-#      yank
-#      prefix-highlight
-#      {
-#        plugin = power-theme;
-#        extraConfig = ''
-#           set -g @tmux_power_theme 'gold'
-#        '';
-#      }
-#      {
-#        plugin = resurrect; # Used by tmux-continuum
-#
-#        # Use XDG data directory
-#        # https://github.com/tmux-plugins/tmux-resurrect/issues/348
-#        extraConfig = ''
-#          set -g @resurrect-dir '$HOME/.cache/tmux/resurrect'
-#          set -g @resurrect-capture-pane-contents 'on'
-#          set -g @resurrect-pane-contents-area 'visible'
-#        '';
-#      }
-#      {
-#        plugin = continuum;
-#        extraConfig = ''
-#          set -g @continuum-restore 'on'
-#          set -g @continuum-save-interval '5' # minutes
-#        '';
-#      }
-#    ];
-#    terminal = "screen-256color";
-#    prefix = "C-x";
-#    escapeTime = 10;
-#    historyLimit = 50000;
-#    extraConfig = ''
-#      # Remove Vim mode delays
-#      set -g focus-events on
-#
-#      # Enable full mouse support
-#      set -g mouse on
-#
-#      # -----------------------------------------------------------------------------
-#      # Key bindings
-#      # -----------------------------------------------------------------------------
-#
-#      # Unbind default keys
-#      unbind C-b
-#      unbind '"'
-#      unbind %
-#
-#      # Split panes, vertical or horizontal
-#      bind-key x split-window -v
-#      bind-key v split-window -h
-#
-#      # Move around panes with vim-like bindings (h,j,k,l)
-#      bind-key -n M-k select-pane -U
-#      bind-key -n M-h select-pane -L
-#      bind-key -n M-j select-pane -D
-#      bind-key -n M-l select-pane -R
-#
-#      # Smart pane switching with awareness of Vim splits.
-#      # This is copy paste from https://github.com/christoomey/vim-tmux-navigator
-#      is_vim="ps -o state= -o comm= -t '#{pane_tty}' \
-#        | grep -iqE '^[^TXZ ]+ +(\\S+\\/)?g?(view|n?vim?x?)(diff)?$'"
-#      bind-key -n 'C-h' if-shell "$is_vim" 'send-keys C-h'  'select-pane -L'
-#      bind-key -n 'C-j' if-shell "$is_vim" 'send-keys C-j'  'select-pane -D'
-#      bind-key -n 'C-k' if-shell "$is_vim" 'send-keys C-k'  'select-pane -U'
-#      bind-key -n 'C-l' if-shell "$is_vim" 'send-keys C-l'  'select-pane -R'
-#      tmux_version='$(tmux -V | sed -En "s/^tmux ([0-9]+(.[0-9]+)?).*/\1/p")'
-#      if-shell -b '[ "$(echo "$tmux_version < 3.0" | bc)" = 1 ]' \
-#        "bind-key -n 'C-\\' if-shell \"$is_vim\" 'send-keys C-\\'  'select-pane -l'"
-#      if-shell -b '[ "$(echo "$tmux_version >= 3.0" | bc)" = 1 ]' \
-#        "bind-key -n 'C-\\' if-shell \"$is_vim\" 'send-keys C-\\\\'  'select-pane -l'"
-#
-#      bind-key -T copy-mode-vi 'C-h' select-pane -L
-#      bind-key -T copy-mode-vi 'C-j' select-pane -D
-#      bind-key -T copy-mode-vi 'C-k' select-pane -U
-#      bind-key -T copy-mode-vi 'C-l' select-pane -R
-#      bind-key -T copy-mode-vi 'C-\' select-pane -l
-#      '';
-#    };
+  tmux = {
+    enable = true;
+    plugins = with pkgs.tmuxPlugins; [
+      vim-tmux-navigator
+      sensible
+      yank
+      prefix-highlight
+      {
+        plugin = resurrect; # Used by tmux-continuum
+        # Use XDG data directory
+        # https://github.com/tmux-plugins/tmux-resurrect/issues/348
+        extraConfig = ''
+          set -g @resurrect-dir '$HOME/.cache/tmux/resurrect'
+          set -g @resurrect-capture-pane-contents 'on'
+          set -g @resurrect-pane-contents-area 'visible'
+        '';
+      }
+      {
+        plugin = continuum;
+        extraConfig = ''
+          set -g @continuum-restore 'on'
+          set -g @continuum-save-interval '0' # minutes
+        '';
+      }
+    ];
+    terminal = "screen-256color";
+    prefix = "C-a";
+    escapeTime = 10;
+    historyLimit = 50000;
+    extraConfig = ''
+
+      unbind %
+      bind | split-window -h
+      
+      unbind '"'
+      bind - split-window -v
+      
+      unbind r
+      bind r source-file ~/.tmux.conf
+      
+      bind -r j resize-pane -D 5
+      bind -r k resize-pane -U 5
+      bind -r l resize-pane -R 5
+      bind -r h resize-pane -L 5
+      
+      bind -r m resize-pane -Z
+      
+      set -g mouse on
+      
+      set-window-option -g mode-keys vi
+      
+      bind-key -T copy-mode-vi 'v' send -X begin-selection
+      bind-key -T copy-mode-vi 'y' send -X copy-selection
+      
+      unbind -T copy-mode-vi MouseDragEnd1Pane
+      
+      # tpm plugin
+      set -g @plugin 'tmux-plugins/tpm' # Ctrl-A-I to install plugins.
+
+      # list of tmux plugins
+      set -g @plugin 'catppuccin/tmux#latest'
+      set -g @plugin 'christoomey/vim-tmux-navigator' # for navigating panes and vim/nvim with Ctrl-hjkl
+      #set -g @plugin 'jimeh/tmux-themepack' # to configure tmux theme
+      set -g @plugin 'tmux-plugins/tmux-resurrect' # persist tmux sessions after computer restart
+      set -g @plugin 'tmux-plugins/tmux-continuum' # automatically saves sessions for you every 15 minutes
+      set -g @plugin 'tmux-plugins/tmux-battery'
+      set -g @plugin 'tmux-plugins/tmux-cpu'
+      set -g @plugin 'jamesoff/tmux-loadavg'
+
+      #set -g @themepack 'powerline/default/cyan' # use this theme for tmux
+      #set -g @themepack 'basic' 
+
+      set -g @catppuccin_status_modules_right "... battery ..."
+      set -g @catppuccin_status_modules_right "... cpu ..."
+      set -g @catppuccin_status_modules_right "... load ..."
+
+      set -g @catppuccin_window_left_separator ""
+      set -g @catppuccin_window_right_separator " "
+      set -g @catppuccin_window_middle_separator " █"
+      set -g @catppuccin_window_number_position "right"
+      
+      set -g @catppuccin_window_default_fill "number"
+      set -g @catppuccin_window_default_text "#W"
+      
+      set -g @catppuccin_window_current_fill "number"
+      set -g @catppuccin_window_current_text "#W"
+      
+      set -g @catppuccin_status_modules_right "directory user host session"
+      set -g @catppuccin_status_left_separator  " "
+      set -g @catppuccin_status_right_separator ""
+      set -g @catppuccin_status_fill "icon"
+      set -g @catppuccin_status_connect_separator "no"
+      
+      set -g @catppuccin_directory_text "#{pane_current_path}"
+      
+      set -g @resurrect-capture-pane-contents 'on' # allow tmux-ressurect to capture pane contents
+      set -g @continuum-restore 'on' # enable tmux-continuum functionality
+      set -g @continuum-save-interval '0' # DISABLE continuum-restore (which will clear cache)
+
+      # Initialize TMUX plugin manager (keep this line at the very bottom of tmux.conf)
+      run '~/.tmux/plugins/tpm/tpm'
+    '';
+  };
 }

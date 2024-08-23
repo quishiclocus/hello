@@ -38,10 +38,10 @@ in
     # If you have previously added these apps to your Mac App Store profile (but not installed them on this system),
     # you may receive an error message "Redownload Unavailable with This Apple ID".
     # This message is safe to ignore. (https://github.com/dustinlyons/nixos-config/issues/83)
-#    masApps = {
-#      "1password" = 1333542190;
+    masApps = {
+      "1password" = 1333542190;
 #      "wireguard" = 1451685025;
-#    };
+    };
   };
 
   # Enable home-manager
@@ -53,8 +53,9 @@ in
         packages = pkgs.callPackage ./packages.nix {};
         file = lib.mkMerge [
           sharedFiles
-          additionalFiles
-          { "emacs-launcher.command".source = myEmacsLauncher; }
+          additionalFiles {
+            "emacs-launcher.command".source = myEmacsLauncher;
+          }
         ];
         stateVersion = "23.11";
       };
@@ -69,13 +70,12 @@ in
   # Fully declarative dock using the latest from Nix Store
   local.dock.enable = true;
   local.dock.entries = [
-    { path = "/Applications/Safari.app/"; }
     { path = "/Applications/Google Chrome.app/"; }
     { path = "/Applications/Microsoft Outlook.app/"; }
     { path = "/Applications/Slack.app/"; }
     { path = "/Applications/Visual Studio Code.app/"; }
-    { path = "/Applications/Nix Apps/Alacritty.app/"; }
-    { path = "/System/Applications/Utilities/Terminal.app/"; }
+    { path = "/Applications/Sublime Text.app/"; }
+    { path = "/Applications/Utilities/WezTerm.app/"; }
     {
       path = "${config.users.users.${user}.home}/src/";
       section = "others";
