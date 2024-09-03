@@ -87,5 +87,4 @@ in
       options = "--sort name --view grid --display stack";
     }
   ];
-
 }
