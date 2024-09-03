@@ -5,24 +5,12 @@ with pkgs; [
   alacritty
   aspell
   aspellDicts.en
-  bat
   btop
   coreutils
-  difftastic
   wget
   zip
-  direnv
-  go
-  gh
-  bat
-  delta
-  eza
-  fd
-  fzf
-  neovim
-  zoxide
-  zsh-autosuggestions
-  zsh-syntax-highlighting
+
+  # Mutt mail stuff
   neomutt
   isync
   curl
@@ -35,23 +23,20 @@ with pkgs; [
   mutt
   mutt-with-sidebar
   offlineimap
-  awscli2
-  oh-my-posh
 
   # Encryption and security tools
   age
-  #age-plugin-yubikey
   gnupg
-  #libfido2
+  libfido2
   oauth2ms
   cyrus_sasl
   cyrus-sasl-xoauth2
   gpgme
 
   # Cloud-related tools and SDKs
-  #docker
-  #docker-compose
   rancher
+  awscli2
+  gh
 
   # Media-related packages
   #emacs-all-the-icons-fonts
@@ -65,26 +50,12 @@ with pkgs; [
   noto-fonts-emoji
   meslo-lgs-nf
 
-  # Node.js development tools
+  # Development tools
   nodePackages.npm # globally install npm
   nodePackages.prettier
   nodejs
-
-  # Text and terminal utilities
-  htop
-  #hunspell
-  iftop
-  #jetbrains-mono
-  jq
-  ripgrep
-  tree
-  tmux
-  unrar
-  unzip
-  zsh-powerlevel10k
-  #starship
-  bash-completion
-  wezterm
+  direnv
+  go
 
   # Python packages
   poetry
@@ -97,4 +68,28 @@ with pkgs; [
     ps.poetry-core
     ps.ipython
   ]))
+
+  # Text and terminal utilities
+  htop
+  iftop
+  jq
+  ripgrep
+  tree
+  tmux
+  unrar
+  unzip
+  bat
+  delta
+  eza
+  fd
+  fzf
+  neovim
+  zoxide
+  #zsh-powerlevel10k
+  #starship
+  bash-completion
+  wezterm
+  oh-my-posh
+  zsh-autosuggestions
+  zsh-syntax-highlighting
 ]
