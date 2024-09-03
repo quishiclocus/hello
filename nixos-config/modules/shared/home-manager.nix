@@ -48,180 +48,180 @@ let name = "Chuck Stearns";
     '';
   };
 
-  starship = {
-    enable = true;
-    enableZshIntegration = true;
-    settings = {
-      add_newline = true;
-      command_timeout = 1000;
-      format = "[░▒▓](os_bg)$os$username[](bg:dir_bg fg:os_bg)$directory[](fg:dir_bg bg:git_bg)$git_branch$git_status[](fg:git_bg bg:lang_bg)$golang[](fg:lang_bg bg:background)\n$character";
-      right_format = "$shell$shlvl$jobs$cmd_duration";
-      continuation_prompt = "▶▶ ";
-      palette = "terafox";
-      palettes.duskfox = {
-        red = "#eb6f92";
-        green = "#a3be8c";
-        purple = "#c4a7e7";
-        yellow = "#f6c177";
-        os_bg = "#6e6a86";
-        os_fg = "#191726";
-        dir_bg = "#a3be8c";
-        dir_fg = "#232136";
-        git_bg = "#f6c177";
-        git_fg = "#2d2a45";
-        lang_bg = "#569fba";
-        lang_fg = "#373354";
-      };
-      palettes.terafox = {
-        red = "#e85c51";
-        green = "#7aa4a1";
-        purple = "#ad5c7c";
-        yellow = "#fda47f";
-        os_bg = "#587b7b";
-        os_fg = "#0f1c1e";
-        dir_bg = "#7aa4a1";
-        dir_fg = "#152528";
-        git_bg = "#fda47f";
-        git_fg = "#254147";
-        lang_bg = "#5a93aa";
-        lang_fg = "#254147";
-      };
-      username = {
-        style_user = "bg:os_bg fg:os_fg";
-        style_root = "bg:os_bg fg:os_fg";
-        format = "[$user]($style)";
-        disabled = false;
-        show_always = true;
-      };
-      hostname = {
-        ssh_only = false;
-        ssh_symbol = "🌐 ";
-        style = "yellow bold";
-        format = "@[$hostname]($style)";
-        trim_at = ".";
-        disabled = false;
-      };
-      character = {
-        disabled = false;
-        success_symbol = "[](bold fg:#a3be8c)";
-        error_symbol = "[](bold fg:#eb6f92)";
-        vimcmd_symbol = "[](bold fg:green)";
-        vimcmd_replace_one_symbol = "[](bold fg:purple)";
-        vimcmd_replace_symbol = "[](bold fg:purple)";
-        vimcmd_visual_symbol = "[](bold fg:yellow)";
-      };
-      directory = {
-        home_symbol = " 󰋞 ~";
-        read_only_style = "fg:dir_fg bg:dir_bg";
-        read_only = "󰌾";
-        truncation_length = 3;
-        truncation_symbol = " …/";
-        truncate_to_repo = true;
-        style = "fg:dir_fg bg:dir_bg";
-        format = "[$path]($style)[$read_only]($read_only_style)";
-      };
-      directory.substitutions = {
-        Documents = "󰈙 ";
-        Downloads = " ";
-        Music = " ";
-        Pictures = " ";
-        src = " ";
-      };
-      cmd_duration = {
-        min_time = 4;
-        show_milliseconds = false;
-        disabled = false;
-        style = "bold italic red";
-        format = " [$duration]($style)";
-      };
-      nix_shell = {
-        disabled = false;
-        pure_msg = "";
-        impure_msg = "";
-        symbol = " ";
-        format = "[$symbol$state(\($name\))]($style) ";
-        style = "bg:os_bg fg:os_fg";
-      };
-      shlvl = {
-        disabled = false;
-        symbol = "λ";
-      };
-      shell = {
-        disabled = false;
-        format = "$indicator";
-        fish_indicator = "f(bright-cyan) ";
-        bash_indicator = "b(bright-cyan) ";
-        zsh_indicator = "z(bright-cyan) ";
-      };
-      python = {
-        symbol = "";
-        style = "bg:lang_bg";
-        python_binary = ["./venv/bin/python" "python" "python3" "python2"];
-        detect_extensions = ["py"];
-      };
-      docker_context = {
-        symbol = " ";
-        style = "blue bold";
-        only_with_files = true;
-        detect_files = ["docker-compose.yml" "docker-compose.yaml" "Dockerfile"];
-        detect_folders = [];
-        disabled = false;
-      };
-      golang = {
-        symbol = "";
-        style = "bg:lang_bg";
-      };
-      git_branch = {
-        symbol = "  ";
-        format = "[$symbol$branch]($style)";
-        style = "fg:git_fg bg:git_bg";
-      };
-      git_status = {
-        format = "[\($all_status$ahead_behind\)]($style)";
-        style = "fg:git_fg bg:git_bg";
-        conflicted = "🏳";
-        up_to_date = "";
-        untracked = "";
-        ahead = "⇡\${count}";
-        diverged = "⇕⇡\${ahead_count}⇣\${behind_count}";
-        behind = "⇣\${count}";
-        stashed = "";
-        modified = "";
-        staged = "[++\($count\)](green)";
-        renamed = "襁";
-        deleted = "";
-      };
-      git_metrics = {
-       format = "( [+$added]($added_style))([-$deleted]($deleted_style) )"; 
-      };
-      aws.symbol = "";
-      os = {
-        disabled = false;
-        style = "bg:os_bg fg:os_fg";
-      };
-      os.symbols = {
-        Windows = "󰍲";
-        Ubuntu = "󰕈";
-        SUSE = "";
-        Raspbian = "󰐿";
-        Mint = " 󰣭 ";
-        Macos = "󰀵";
-        Manjaro = "";
-        Linux = "󰌽";
-        Gentoo = "󰣨";
-        Fedora = "󰣛";
-        Alpine = "";
-        Amazon = "";
-        Android = "";
-        Arch = "󰣇";
-        Artix = "󰣇";
-        CentOS = "";
-        Debian = "󰣚";
-        Redhat = "󱄛";
-        RedHatEnterprise = "󱄛";
-      };
-    };
-  };
+#  starship = {
+#    enable = true;
+#    enableZshIntegration = true;
+#    settings = {
+#      add_newline = true;
+#      command_timeout = 1000;
+#      format = "[░▒▓](os_bg)$os$username[](bg:dir_bg fg:os_bg)$directory[](fg:dir_bg bg:git_bg)$git_branch$git_status[](fg:git_bg bg:lang_bg)$golang[](fg:lang_bg bg:background)\n$character";
+#      right_format = "$shell$shlvl$jobs$cmd_duration";
+#      continuation_prompt = "▶▶ ";
+#      palette = "terafox";
+#      palettes.duskfox = {
+#        red = "#eb6f92";
+#        green = "#a3be8c";
+#        purple = "#c4a7e7";
+#        yellow = "#f6c177";
+#        os_bg = "#6e6a86";
+#        os_fg = "#191726";
+#        dir_bg = "#a3be8c";
+#        dir_fg = "#232136";
+#        git_bg = "#f6c177";
+#        git_fg = "#2d2a45";
+#        lang_bg = "#569fba";
+#        lang_fg = "#373354";
+#      };
+#      palettes.terafox = {
+#        red = "#e85c51";
+#        green = "#7aa4a1";
+#        purple = "#ad5c7c";
+#        yellow = "#fda47f";
+#        os_bg = "#587b7b";
+#        os_fg = "#0f1c1e";
+#        dir_bg = "#7aa4a1";
+#        dir_fg = "#152528";
+#        git_bg = "#fda47f";
+#        git_fg = "#254147";
+#        lang_bg = "#5a93aa";
+#        lang_fg = "#254147";
+#      };
+#      username = {
+#        style_user = "bg:os_bg fg:os_fg";
+#        style_root = "bg:os_bg fg:os_fg";
+#        format = "[$user]($style)";
+#        disabled = false;
+#        show_always = true;
+#      };
+#      hostname = {
+#        ssh_only = false;
+#        ssh_symbol = "🌐 ";
+#        style = "yellow bold";
+#        format = "@[$hostname]($style)";
+#        trim_at = ".";
+#        disabled = false;
+#      };
+#      character = {
+#        disabled = false;
+#        success_symbol = "[](bold fg:#a3be8c)";
+#        error_symbol = "[](bold fg:#eb6f92)";
+#        vimcmd_symbol = "[](bold fg:green)";
+#        vimcmd_replace_one_symbol = "[](bold fg:purple)";
+#        vimcmd_replace_symbol = "[](bold fg:purple)";
+#        vimcmd_visual_symbol = "[](bold fg:yellow)";
+#      };
+#      directory = {
+#        home_symbol = " 󰋞 ~";
+#        read_only_style = "fg:dir_fg bg:dir_bg";
+#        read_only = "󰌾";
+#        truncation_length = 3;
+#        truncation_symbol = " …/";
+#        truncate_to_repo = true;
+#        style = "fg:dir_fg bg:dir_bg";
+#        format = "[$path]($style)[$read_only]($read_only_style)";
+#      };
+#      directory.substitutions = {
+#        Documents = "󰈙";
+#        Downloads = "";
+#        Music = "";
+#        Pictures = "";
+#        src = "";
+#      };
+#      cmd_duration = {
+#        min_time = 4;
+#        show_milliseconds = false;
+#        disabled = false;
+#        style = "bold italic red";
+#        format = " [$duration]($style)";
+#      };
+#      nix_shell = {
+#        disabled = false;
+#        pure_msg = "";
+#        impure_msg = "";
+#        symbol = " ";
+#        format = "[$symbol$state(\($name\))]($style) ";
+#        style = "bg:os_bg fg:os_fg";
+#      };
+#      shlvl = {
+#        disabled = false;
+#        symbol = "λ";
+#      };
+#      shell = {
+#        disabled = false;
+#        format = "$indicator";
+#        fish_indicator = "f(bright-cyan) ";
+#        bash_indicator = "b(bright-cyan) ";
+#        zsh_indicator = "z(bright-cyan) ";
+#      };
+#      python = {
+#        symbol = "";
+#        style = "bg:lang_bg";
+#        python_binary = ["./venv/bin/python" "python" "python3" "python2"];
+#        detect_extensions = ["py"];
+#      };
+#      docker_context = {
+#        symbol = " ";
+#        style = "blue bold";
+#        only_with_files = true;
+#        detect_files = ["docker-compose.yml" "docker-compose.yaml" "Dockerfile"];
+#        detect_folders = [];
+#        disabled = false;
+#      };
+#      golang = {
+#        symbol = "";
+#        style = "bg:lang_bg";
+#      };
+#      git_branch = {
+#        symbol = "  ";
+#        format = "[$symbol$branch]($style)";
+#        style = "fg:git_fg bg:git_bg";
+#      };
+#      git_status = {
+#        format = "[\($all_status$ahead_behind\)]($style)";
+#        style = "fg:git_fg bg:git_bg";
+#        conflicted = "🏳";
+#        up_to_date = "";
+#        untracked = "";
+#        ahead = "⇡\${count}";
+#        diverged = "⇕⇡\${ahead_count}⇣\${behind_count}";
+#        behind = "⇣\${count}";
+#        stashed = "";
+#        modified = "";
+#        staged = "[++\($count\)](green)";
+#        renamed = "襁";
+#        deleted = "";
+#      };
+#      git_metrics = {
+#       format = "( [+$added]($added_style))([-$deleted]($deleted_style) )"; 
+#      };
+#      aws.symbol = "";
+#      os = {
+#        disabled = false;
+#        style = "bg:os_bg fg:os_fg";
+#      };
+#      os.symbols = {
+#        Windows = "󰍲";
+#        Ubuntu = "󰕈";
+#        SUSE = "";
+#        Raspbian = "󰐿";
+#        Mint = " 󰣭 ";
+#        Macos = "󰀵";
+#        Manjaro = "";
+#        Linux = "󰌽";
+#        Gentoo = "󰣨";
+#        Fedora = "󰣛";
+#        Alpine = "";
+#        Amazon = "";
+#        Android = "";
+#        Arch = "󰣇";
+#        Artix = "󰣇";
+#        CentOS = "";
+#        Debian = "󰣚";
+#        Redhat = "󱄛";
+#        RedHatEnterprise = "󱄛";
+#      };
+#    };
+#  };
 
   git = {
     enable = true;

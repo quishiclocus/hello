@@ -36,6 +36,7 @@ with pkgs; [
   mutt-with-sidebar
   offlineimap
   awscli2
+  oh-my-posh
 
   # Encryption and security tools
   age
