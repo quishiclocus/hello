@@ -1,0 +1,54 @@
+import = [
+    "~/.config/alacritty/themes/themes/coolnight.toml"
+]
+
+[env]
+TERM = "xterm-256color"
+
+[window]
+padding.x = 10
+padding.y = 10
+decorations = "Full"
+opacity = 0.7
+blur = true
+class.general = "Alacritty"
+class.instance = "Alacritty"
+option_as_alt = "Both"
+
+[font]
+normal.family = "MesloLGS NF"
+size = 14
+
+[cursor]
+style = "Block"
+
+[[keyboard.bindings]]
+action = "ToggleSimpleFullscreen"
+key = "`"
+mods = "Control"
+
+[[keyboard.bindings]]
+action = "CreateNewTab"
+key = "T"
+mods = "Command|Shift"
+
+[[keyboard.bindings]]
+action = "SelectNextTab"
+key = "ArrowRight"
+mods = "Command|Shift"
+
+[[keyboard.bindings]]
+action = "SelectPreviousTab"
+key = "ArrowLeft"
+mods = "Command|Shift"
+
+[[keyboard.bindings]]
+chars = "u001BF"
+key = "ArrowRight"
+mods = "Control"
+
+[[keyboard.bindings]]
+chars = "u001BB"
+key = "ArrowLeft"
+mods = "Control"
+

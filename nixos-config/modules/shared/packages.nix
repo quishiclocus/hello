@@ -20,9 +20,10 @@ with pkgs; [
   notmuch
   abook
   urlscan
-  mutt
-  mutt-with-sidebar
+  neomutt
   offlineimap
+  cyrus-sasl-xoauth2
+  cyrus_sasl
 
   # Encryption and security tools
   age
@@ -37,6 +38,8 @@ with pkgs; [
   rancher
   awscli2
   gh
+  lazygit
+  gitmux
 
   # Media-related packages
   #emacs-all-the-icons-fonts
@@ -56,6 +59,7 @@ with pkgs; [
   nodejs
   direnv
   go
+  golangci-lint
 
   # Python packages
   poetry
@@ -88,8 +92,10 @@ with pkgs; [
   #zsh-powerlevel10k
   #starship
   bash-completion
+
   wezterm
   oh-my-posh
   zsh-autosuggestions
   zsh-syntax-highlighting
+  #bash-language-server
 ]
