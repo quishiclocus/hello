@@ -92,7 +92,7 @@ with pkgs; [
   #zsh-powerlevel10k
   #starship
   bash-completion
-
+  fish
   wezterm
   oh-my-posh
   zsh-autosuggestions
