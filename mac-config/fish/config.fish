@@ -38,13 +38,13 @@ if type -q pyenv
 end
 
 # `ls` → `ls -laG` abbreviation
-abbr -a -g ls ls -laG
+#abbr -a -g ls ls -laG
 
 # `ls` → `exa` abbreviation
 # Requires `brew install exa`
-if type -q exa
-  abbr --add -g ls 'exa --long --classify --all --header --git --no-user --tree --level 1'
-end
+#if type -q exa
+#  abbr --add -g ls 'exa --long --classify --all --header --git --no-user --tree --level 1'
+#end
 
 # `cat` → `bat` abbreviation
 # Requires `brew install bat`
@@ -61,10 +61,11 @@ end
 set BAT_THEME "terafox"
 
 alias diff=difft
-alias ls='ls --color=auto'
 alias cmd0="export IN_NIX_SHELL=true; cd ~/src/cmd0/infrastructure; nix develop -c zsh"
 alias vi="nvim"
 alias tags="cat ~/.mutt/tags"
 alias cat="bat --style=plain"
 alias less="bat --style=auto,header-filesize"
-alias ls="eza --color=always --git --icons=always -l -snew --color-scale --color-scale-mode=gradient"
+alias ls="exa --long --classify --all --header --git --no-user --tree --level 1"
+
+oh-my-posh init fish | source
