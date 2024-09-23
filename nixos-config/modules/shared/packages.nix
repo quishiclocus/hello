@@ -91,6 +91,7 @@ with pkgs; [
   zoxide
   #zsh-powerlevel10k
   #starship
+  bashInteractive
   bash-completion
   fish
   wezterm
