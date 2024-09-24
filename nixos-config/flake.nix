@@ -4,7 +4,8 @@
     #nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     #nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-24.05-darwin";
     #nixpkgs.url = "github:nixos/nixpkgs/a3103d68517c6ad262ea27c96fc4a38ad81be7a0";
-    nixpkgs.url = "github:nixos/nixpkgs/944b2aea7f0a2d7c79f72468106bc5510cbf5101";
+    #nixpkgs.url = "github:nixos/nixpkgs/944b2aea7f0a2d7c79f72468106bc5510cbf5101";
+    nixpkgs.url = "github:nixos/nixpkgs/a1d92660c6b3b7c26fb883500a80ea9d33321be2";
     agenix.url = "github:ryantm/agenix";
     home-manager.url = "github:nix-community/home-manager";
     darwin = {
