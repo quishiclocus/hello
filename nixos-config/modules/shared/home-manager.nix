@@ -1,9 +1,10 @@
 { config, pkgs, lib, ... }:
 
-let name = "Chuck Stearns";
-    user = "chuck";
-    email = "chuck.stearns@gmail.com"; in
-{
+let
+  name = "Chuck Stearns";
+  user = "chuck";
+  email = "chuck.stearns@gmail.com";
+in {
   # Shared shell configuration
   zsh = {
     enable = true;
