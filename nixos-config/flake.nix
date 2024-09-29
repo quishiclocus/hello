@@ -3,9 +3,7 @@
   inputs = {
     #nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     #nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-24.05-darwin";
-    #nixpkgs.url = "github:nixos/nixpkgs/a3103d68517c6ad262ea27c96fc4a38ad81be7a0";
-    #nixpkgs.url = "github:nixos/nixpkgs/944b2aea7f0a2d7c79f72468106bc5510cbf5101";
-    nixpkgs.url = "github:nixos/nixpkgs/a1d92660c6b3b7c26fb883500a80ea9d33321be2";
+    nixpkgs.url = "github:nixos/nixpkgs/37df9bcf93431c7f9f9358aec2d7ed0a52d7ba1d";
     agenix.url = "github:ryantm/agenix";
     home-manager.url = "github:nix-community/home-manager";
     darwin = {
@@ -77,14 +75,7 @@
         "check-keys" = mkApp "check-keys" system;
         "rollback" = mkApp "rollback" system;
       };
-      nvpkgs = import (builtins.fetchGit {
-         # Descriptive name to make the store path easier to identify
-         name = "my-old-revision";
-         url = "https://github.com/NixOS/nixpkgs/";
-         ref = "refs/heads/nixpkgs-unstable";
-         rev = "05bbf675397d5366259409139039af8077d695ce";
-      }) {};
-      myPkg = nvpkgs.neovim;
+
     in
     {
       devShells = forAllSystems devShell;
@@ -97,7 +88,7 @@
           modules = [
             home-manager.darwinModules.home-manager
             nix-homebrew.darwinModules.nix-homebrew
-            {
+            {  
               nix-homebrew = {
                 inherit user;
                 enable = true;
@@ -115,20 +106,20 @@
         }
       );
 
-      nixosConfigurations = nixpkgs.lib.genAttrs linuxSystems (system: nixpkgs.lib.nixosSystem {
-        inherit system;
-        specialArgs = inputs;
-        modules = [
-          disko.nixosModules.disko
-          home-manager.nixosModules.home-manager {
-            home-manager = {
-              useGlobalPkgs = true;
-              useUserPackages = true;
-              users.${user} = import ./modules/nixos/home-manager.nix;
-            };
-          }
-          ./hosts/nixos
-        ];
-     });
+#      nixosConfigurations = nixpkgs.lib.genAttrs linuxSystems (system: nixpkgs.lib.nixosSystem {
+#        inherit system;
+#        specialArgs = inputs;
+#        modules = [
+#          disko.nixosModules.disko
+#          home-manager.nixosModules.home-manager {
+#            home-manager = {
+#              useGlobalPkgs = true;
+#              useUserPackages = true;
+#              users.${user} = import ./modules/nixos/home-manager.nix;
+#            };
+#          }
+#          ./hosts/nixos
+#        ];
+#     });
   };
 }

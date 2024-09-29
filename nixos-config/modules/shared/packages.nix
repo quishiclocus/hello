@@ -1,5 +1,6 @@
 { pkgs }:
 
+
 with pkgs; [
   # General packages for development and system management
   alacritty
@@ -87,7 +88,6 @@ with pkgs; [
   eza
   fd
   fzf
-  neovim
   zoxide
   #zsh-powerlevel10k
   #starship

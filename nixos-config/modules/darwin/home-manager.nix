@@ -1,4 +1,4 @@
-{ config, pkgs, lib, home-manager, ... }:
+{ config, pkgs, nvpkgs, lib, home-manager, ... }:
 
 let
   user = "chuck";
@@ -47,7 +47,7 @@ in
   # Enable home-manager
   home-manager = {
     useGlobalPkgs = true;
-    users.${user} = { pkgs, config, lib, ... }:{
+    users.${user} = { pkgs, nvpkgs, config, lib, ... }:{
       home = {
         enableNixpkgsReleaseCheck = false;
         packages = pkgs.callPackage ./packages.nix {};
@@ -59,7 +59,7 @@ in
         ];
         stateVersion = "23.11";
       };
-      programs = {} // import ../shared/home-manager.nix { inherit config pkgs lib; };
+      programs = {} // import ../shared/home-manager.nix { inherit config pkgs nvpkgs lib; };
 
       # Marked broken Oct 20, 2022 check later to remove this
       # https://github.com/nix-community/home-manager/issues/3344
