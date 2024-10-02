@@ -37,13 +37,6 @@
   };
   outputs = { self, darwin, nix-homebrew, homebrew-bundle, homebrew-core, homebrew-cask, home-manager, nixpkgs, neovim-nightly-overlay, disko, agenix, secrets } @inputs:
     let
-      unstable = import <nixpkgs> {
-        config = nixpkgs.config;
-        overlays = [
-          inputs.neovim-nightly-overlay.overlays.default
-        ];
-        neovim = import <neovim-nightly-overlay> { inherit inputs; };
-      };
       user = "chuck";
       linuxSystems = [ "x86_64-linux" "aarch64-linux" ];
       darwinSystems = [ "aarch64-darwin" "x86_64-darwin" ];
@@ -83,8 +76,10 @@
         "check-keys" = mkApp "check-keys" system;
         "rollback" = mkApp "rollback" system;
       };
+      nvim = import <neovim-nightly-overlay> {};
     in
     {
+      nixpkgs.overlays = [ inputs.neovim-nightly-overlay.overlays.default ];
       devShells = forAllSystems devShell;
       apps = nixpkgs.lib.genAttrs linuxSystems mkLinuxApps // nixpkgs.lib.genAttrs darwinSystems mkDarwinApps;
 
