@@ -89,7 +89,6 @@ with pkgs; [
   fd
   fzf
   zoxide
-  neovim
   #zsh-powerlevel10k
   #starship
   bashInteractive

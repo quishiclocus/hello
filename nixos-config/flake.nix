@@ -37,6 +37,13 @@
   };
   outputs = { self, darwin, nix-homebrew, homebrew-bundle, homebrew-core, homebrew-cask, home-manager, nixpkgs, neovim-nightly-overlay, disko, agenix, secrets } @inputs:
     let
+      unstable = import <nixpkgs> {
+        config = nixpkgs.config;
+        overlays = [
+          inputs.neovim-nightly-overlay.overlays.default
+        ];
+        neovim = import <neovim-nightly-overlay> { inherit inputs; };
+      };
       user = "chuck";
       linuxSystems = [ "x86_64-linux" "aarch64-linux" ];
       darwinSystems = [ "aarch64-darwin" "x86_64-darwin" ];
@@ -76,9 +83,6 @@
         "check-keys" = mkApp "check-keys" system;
         "rollback" = mkApp "rollback" system;
       };
-      overlays = [
-        inputs.neovim-nightly-overlay.overlays.default
-      ];
     in
     {
       devShells = forAllSystems devShell;
@@ -109,20 +113,19 @@
         }
       );
 
-      nixosConfigurations = nixpkgs.lib.genAttrs linuxSystems (system: nixpkgs.lib.nixosSystem {
-        inherit system;
-        specialArgs = inputs;
-        modules = [
-          disko.nixosModules.disko
-          home-manager.nixosModules.home-manager {
-            home-manager = {
-              useGlobalPkgs = true;
-              useUserPackages = true;
-              users.${user} = import ./modules/nixos/home-manager.nix;
-            };
-          }
-          ./hosts/nixos
-        ];
-     });
-  };
+#      nixosConfigurations = nixpkgs.lib.genAttrs linuxSystems (system: nixpkgs.lib.nixosSystem {
+#        inherit system;
+#        specialArgs = inputs;
+#        modules = [
+#          disko.nixosModules.disko
+#          home-manager.nixosModules.home-manager {
+#            home-manager = {
+#              useGlobalPkgs = true;
+#              useUserPackages = true;
+#              users.${user} = import ./modules/nixos/home-manager.nix;
+#            };
+#          }
+#          ./hosts/nixos
+#        ];
+   };
 }
