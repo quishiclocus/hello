@@ -6,7 +6,6 @@
     nixpkgs.url = "github:nixos/nixpkgs/37df9bcf93431c7f9f9358aec2d7ed0a52d7ba1d";
     agenix.url = "github:ryantm/agenix";
     home-manager.url = "github:nix-community/home-manager";
-    neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
     darwin = {
       url = "github:LnL7/nix-darwin/master";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -35,7 +34,7 @@
       flake = false;
     };
   };
-  outputs = { self, darwin, nix-homebrew, homebrew-bundle, homebrew-core, homebrew-cask, home-manager, nixpkgs, neovim-nightly-overlay, disko, agenix, secrets } @inputs:
+  outputs = { self, darwin, nix-homebrew, homebrew-bundle, homebrew-core, homebrew-cask, home-manager, nixpkgs, disko, agenix, secrets } @inputs:
     let
       user = "chuck";
       linuxSystems = [ "x86_64-linux" "aarch64-linux" ];
@@ -76,10 +75,8 @@
         "check-keys" = mkApp "check-keys" system;
         "rollback" = mkApp "rollback" system;
       };
-      nvim = import <neovim-nightly-overlay> {};
     in
     {
-      nixpkgs.overlays = [ inputs.neovim-nightly-overlay.overlays.default ];
       devShells = forAllSystems devShell;
       apps = nixpkgs.lib.genAttrs linuxSystems mkLinuxApps // nixpkgs.lib.genAttrs darwinSystems mkDarwinApps;
 

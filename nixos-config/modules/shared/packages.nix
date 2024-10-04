@@ -61,6 +61,9 @@ with pkgs; [
   direnv
   go
   golangci-lint
+  cmake
+  clang
+  libintl
 
   # Python packages
   poetry
