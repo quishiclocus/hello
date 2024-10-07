@@ -10,7 +10,6 @@ let
     in
     {
       aarch64-darwin = fetch "macos-arm64" "f37b379a0fc0393b8bc59c78ca1f84f8713ec6a9478dc94c39d81e3df6b43006";
-
     };
 in
 stdenv.mkDerivation {
