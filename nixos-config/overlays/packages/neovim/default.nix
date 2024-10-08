@@ -9,7 +9,7 @@ let
       };
     in
     {
-      aarch64-darwin = fetch "macos-arm64" "f37b379a0fc0393b8bc59c78ca1f84f8713ec6a9478dc94c39d81e3df6b43006";
+      aarch64-darwin = fetch "macos-arm64" "dd0681fac15282d619e7b7694def7a8c76e4741441ffff5676538be125523dd8";
     };
 in
 stdenv.mkDerivation {
