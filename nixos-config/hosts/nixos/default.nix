@@ -293,6 +293,9 @@ let user = "chuck";
     font-awesome
     noto-fonts
     noto-fonts-emoji
+    nerdfonts
+    iosevka
+    fantasque-sans-mono
   ];
 
   environment.systemPackages = with pkgs; [

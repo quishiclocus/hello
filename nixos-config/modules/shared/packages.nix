@@ -53,6 +53,9 @@ with pkgs; [
   noto-fonts
   noto-fonts-emoji
   meslo-lgs-nf
+  iosevka
+  fantasque-sans-mono
+  nerdfonts
 
   # Development tools
   nodePackages.npm # globally install npm
